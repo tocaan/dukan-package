@@ -13,10 +13,10 @@ class AwsService
     {
         $this->s3 = new S3Client([
             'version' => 'latest',
-            'region' => config('services.s3.region'),
+            'region' => config('dukan.s3.region'),
             'credentials' => [
-                'key' => config('services.s3.key'),
-                'secret' => config('services.s3.secret'),
+                'key' => config('dukan.s3.key'),
+                'secret' => config('dukan.s3.secret'),
             ],
         ]);
     }
@@ -87,7 +87,7 @@ class AwsService
     {
         try {
             $objects = $this->s3->listObjects(['Bucket' => $bucketName]);
-            return $objects['Contents'] ??[];
+            return $objects['Contents'] ?? [];
         } catch (\Exception $e) {
             throw new \Exception("Failed to fitch database in AWS S3: {$e->getMessage()}");
         }

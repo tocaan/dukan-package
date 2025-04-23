@@ -19,7 +19,9 @@ class DukanServiceProvider extends ServiceProvider
             TenantStatusChanged::class,
             [TenantStatusLogListener::class, 'handle']
         );
-
+        $this->publishes([
+            __DIR__ . '/../config/dukan.php' => config_path('dukan.php'),
+        ], 'config');
         $this->publishes([
             __DIR__ . '/../Database/Migrations' => database_path('migrations'),
         ], 'migrations');

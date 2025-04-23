@@ -14,8 +14,8 @@ class PloiService
 
     public function __construct()
     {
-        $this->apiToken = config('services.ploi.api_token');
-        $this->serverId = config('services.ploi.server_id');
+        $this->apiToken = config('dukan.ploi.api_token');
+        $this->serverId = config('dukan.ploi.server_id');
     }
 
     /**

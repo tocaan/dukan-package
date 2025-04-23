@@ -14,8 +14,8 @@ class CloudflareService
 
     public function __construct()
     {
-        $this->apiToken = config('services.cloudflare.api_token');
-        $this->zoneId = config('services.cloudflare.zone_id');
+        $this->apiToken = config('dukan.cloudflare.api_token');
+        $this->zoneId = config('dukan.cloudflare.zone_id');
     }
 
     /**

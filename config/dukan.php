@@ -1,5 +1,35 @@
 <?php
 
 return [
-    'store_name' => 'Dukan Store',
+
+    /*
+    |--------------------------------------------------------------------------
+    | S3 Configuration
+    |--------------------------------------------------------------------------
+    */
+    's3' => [
+        'region' => env('DUKAN_S3_REGION', 'us-east-1'),
+        'key' => env('DUKAN_S3_KEY'),
+        'secret' => env('DUKAN_S3_SECRET'),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Cloudflare Configuration
+    |--------------------------------------------------------------------------
+    */
+    'cloudflare' => [
+        'api_token' => env('DUKAN_CLOUDFLARE_API_TOKEN'),
+        'zone_id' => env('DUKAN_CLOUDFLARE_ZONE_ID'),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Ploi Configuration (optional)
+    |--------------------------------------------------------------------------
+    */
+    'ploi' => [
+        'api_token' => env('DUKAN_PLOI_API_TOKEN'),
+        'server_id' => env('DUKAN_PLOI_SERVER_ID'),
+    ],
 ];
