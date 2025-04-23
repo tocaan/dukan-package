@@ -3,6 +3,7 @@
 namespace Tocaan\Dukan\Listeners;
 //use App\Models\TenantStatusLog;
 use Tocaan\Dukan\Events\TenantStatusChanged;
+use Tocaan\Dukan\Models\TenantStatusLog;
 
 class TenantStatusLogListener
 {
@@ -56,9 +57,9 @@ class TenantStatusLogListener
      */
     public function handle(TenantStatusChanged $event): void
     {
-//        TenantStatusLog::updateOrCreate(
-//            ['tenant_id' => $event->tenant->id, 'status' => $event->newStatus],
-//            ['tenant_id' => $event->tenant->id, 'status' => $event->newStatus]
-//        );
+        TenantStatusLog::updateOrCreate(
+            ['tenant_id' => $event->tenant->id, 'status' => $event->newStatus],
+            ['tenant_id' => $event->tenant->id, 'status' => $event->newStatus]
+        );
     }
 }

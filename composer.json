@@ -8,6 +8,7 @@
     "illuminate/bus": "*",
     "illuminate/queue": "*",
     "illuminate/support": "*",
+    "illuminate/events": "*",
     "php": "^8.0",
     "stancl/tenancy": "^3.8",
     "aws/aws-sdk-php": "^3.342"
