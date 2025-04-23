@@ -3,6 +3,7 @@
   "description": "Multi-tenant helper services for Laravel using Stancl Tenancy.",
   "type": "library",
   "license": "MIT",
+  "version": "1.0.0",
   "keywords": ["Laravel", "Multi-tenant", "S3", "Cloudflare", "Tenancy", "Stancl","Ploi"],
   "require": {
     "guzzlehttp/guzzle": "*",
@@ -32,6 +33,12 @@
       ]
     }
   },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/tocaan/dukan-package"
+    }
+  ],
   "minimum-stability": "dev",
   "prefer-stable": true
 }
