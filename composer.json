@@ -26,7 +26,8 @@
   ],
   "autoload": {
     "psr-4": {
-      "Tocaan\\Dukan\\": "src/"
+      "Tocaan\\Dukan\\": "src/",
+      "Tocaan\\Dukan\\Tests\\": "tests/"
     }
   },
   "extra": {
