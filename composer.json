@@ -33,12 +33,6 @@
       ]
     }
   },
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "https://github.com/tocaan/dukan-package"
-    }
-  ],
   "minimum-stability": "dev",
   "prefer-stable": true
 }
