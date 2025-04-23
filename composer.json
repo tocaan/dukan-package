@@ -1,0 +1,26 @@
+{
+  "name": "tocaan/dukan",
+  "description": "Simple Laravel package by Tocaan",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "tocaan",
+      "email": "your@email.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Tocaan\\Dukan\\": "src/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Tocaan\\Dukan\\DukanServiceProvider"
+      ]
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
