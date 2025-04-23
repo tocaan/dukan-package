@@ -1,5 +1,4 @@
-# Dukan (by Tocaan)
-
+# Dukan
 **Multi-tenant helper services for Laravel** — integrated with [stancl/tenancy](https://tenancyforlaravel.com/) to support SaaS applications. Provides out-of-the-box support for AWS S3, Cloudflare, Ploi, and logs tenant status events.
 
 ## Install
