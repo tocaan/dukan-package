@@ -3,10 +3,19 @@
   "description": "Simple Laravel package by Tocaan",
   "type": "library",
   "license": "MIT",
+  "require": {
+    "guzzlehttp/guzzle": "*",
+    "illuminate/bus": "*",
+    "illuminate/queue": "*",
+    "illuminate/support": "*",
+    "php": "^8.0",
+    "stancl/tenancy": "^3.8",
+    "aws/aws-sdk-php": "^3.342"
+  },
   "authors": [
     {
       "name": "tocaan",
-      "email": "your@email.com"
+      "email": "dev@tocaan.co"
     }
   ],
   "autoload": {
