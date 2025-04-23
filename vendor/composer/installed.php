@@ -3,7 +3,7 @@
         'name' => 'tocaan/dukan',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'a01d3e7fa979ab3708ae623e1c9a81a813b0770a',
+        'reference' => '12aec01ecc4bd9403faa02f1f0723d8265831cf6',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -553,7 +553,7 @@
         'tocaan/dukan' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'a01d3e7fa979ab3708ae623e1c9a81a813b0770a',
+            'reference' => '12aec01ecc4bd9403faa02f1f0723d8265831cf6',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

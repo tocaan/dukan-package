@@ -1,6 +1,6 @@
 {
   "name": "tocaan/dukan",
-  "description": "Simple Laravel package by Tocaan",
+  "description": "Multi-tenant helper services for Laravel using Stancl Tenancy.",
   "type": "library",
   "license": "MIT",
   "require": {
