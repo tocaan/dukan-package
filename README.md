@@ -14,6 +14,15 @@ Add to your Laravel project:
 ```
 composer require tocaan/dukan
 ```
+```
+php artisan vendor:publish \
+  --provider="Tocaan\Dukan\DukanServiceProvider" \
+  --tag="config"
+```
+
+```
+php artisan migrate
+```
 
 ```
 DUKAN_S3_KEY=your-key
@@ -31,11 +40,6 @@ DUKAN_PLOI_API_TOKEN=your-ploi-token
 DUKAN_PLOI_SERVER_ID=your-server-id
 ```
 
-Then:
-
-```bash
-php artisan vendor:publish --tag=config
-```
 
 Access the route:
 
