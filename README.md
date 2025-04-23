@@ -1,11 +1,6 @@
 # Dukan (by Tocaan)
 
-Dukan — A Tocaan Laravel package providing multi-tenant storefront tools.
-• Centralized configuration for S3, Cloudflare, and Ploi integrations
-• Easy event-driven tenant status logging (TenantStatusLog model & migration)
-• Built-in services for AWS S3, Cloudflare cache purging, and Ploi deployments
-• Artisan commands to scaffold models, migrations, and more
-• Fully publishable config (dukan.php) for environment overrides
+**Multi-tenant helper services for Laravel** — integrated with [stancl/tenancy](https://tenancyforlaravel.com/) to support SaaS applications. Provides out-of-the-box support for AWS S3, Cloudflare, Ploi, and logs tenant status events.
 
 ## Install
 
