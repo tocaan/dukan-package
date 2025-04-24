@@ -9,9 +9,7 @@ Add to your Laravel project:
 composer require tocaan/dukan
 ```
 ```
-php artisan vendor:publish \
-  --provider="Tocaan\Dukan\DukanServiceProvider" \
-  --tag="config"
+php artisan vendor:publish
 ```
 
 ```
