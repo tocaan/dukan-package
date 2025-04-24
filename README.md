@@ -8,6 +8,8 @@ Add to your Laravel project:
 ```
 composer require tocaan/dukan
 ```
+then publish the config and migration files and
+**select Provider: Tocaan\Dukan\DukanServiceProvider**
 ```
 php artisan vendor:publish
 ```
@@ -15,7 +17,7 @@ php artisan vendor:publish
 ```
 php artisan migrate
 ```
-
+**handle configuration file**
 ```
 DUKAN_S3_KEY=your-key
 DUKAN_S3_SECRET=your-secret
@@ -32,9 +34,13 @@ DUKAN_PLOI_API_TOKEN=your-ploi-token
 DUKAN_PLOI_SERVER_ID=your-server-id
 ```
 
+[//]: # ()
+[//]: # ()
+[//]: # (Access the route:)
 
-Access the route:
+[//]: # ()
+[//]: # (```)
 
-```
-http://yourapp.test/dukan
-```
+[//]: # (http://yourapp.test/dukan)
+
+[//]: # (```)
