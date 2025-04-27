@@ -8,10 +8,8 @@ Add to your Laravel project:
 ```
 composer require tocaan/dukan
 ```
-then publish the config and migration files and
-**select Provider: Tocaan\Dukan\DukanServiceProvider**
 ```
-php artisan vendor:publish
+php artisan vendor:publish --provider="Tocaan\Dukan\DukanServiceProvider"
 ```
 
 ```
