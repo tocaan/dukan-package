@@ -25,6 +25,7 @@ class DukanServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../Database/Migrations' => database_path('migrations'),
         ], 'migrations');
+        // edit
         $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'dukan');
         $this->publishes([
