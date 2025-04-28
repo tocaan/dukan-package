@@ -33,6 +33,7 @@ DUKAN_CLOUDFLARE_IP=your-cloudflare-ip
 DUKAN_PLOI_API_TOKEN=your-ploi-token
 DUKAN_PLOI_SERVER_ID=your-server-id
 DUKAN_PLOI_SITE_ID=your-site-id
+DUKAN_PLOI_SERVER_IP=your-server-ip
 ```
 
 [//]: # ()

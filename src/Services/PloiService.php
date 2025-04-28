@@ -2,12 +2,15 @@
 
 namespace Tocaan\Dukan\Services;
 
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Http\Client\Response;
+use Illuminate\Support\Facades\Http;
 
 class PloiService
 {
     private const API_BASE_URL = 'https://ploi.io/api';
+    private const MAX_RETRIES = 3;
+    private const RETRY_DELAY = 30; // seconds
 
     private string $apiToken;
     private int $serverId;
@@ -54,7 +57,7 @@ class PloiService
      * @return array Tenant details
      * @throws \Exception
      */
-    public function createTenant(int $siteId, string|array $tenants): array
+    public function createTenant(int|string $siteId, string|array $tenants): array
     {
         try {
             // Convert single string to array if necessary
@@ -62,6 +65,12 @@ class PloiService
             
             $response = $this->makeRequest('post', "servers/{$this->serverId}/sites/{$siteId}/tenants", [
                 'tenants' => $tenantDomains,
+            ]);
+
+            Log::info('Ploi tenant created successfully', [
+                'site_id' => $siteId,
+                'tenants' => $tenants,
+                'response' => $response->json(),
             ]);
 
             return $response->json();
@@ -85,29 +94,53 @@ class PloiService
      * @return array Certificate request details
      * @throws \Exception
      */
-    public function requestCertificate(int $siteId, string $tenant, string|array $domains): array
+    public function requestCertificate(int|string $siteId, string $tenant, string|array $domains): array
     {
-        try {
-            // Convert domains to array if string and join with commas
-            $domainList = is_string($domains) ? $domains : implode(',', $domains);
-            $response = $this->makeRequest(
-                'post',
-                "servers/{$this->serverId}/sites/{$siteId}/tenants/{$tenant}/request-certificate",
-                // ['domains' => $domainList]
-            );
+        $attempts = 0;
         
-
-            return $response->json();
-        } catch (\Exception $e) {
-            Log::error('Ploi SSL certificate request failed', [
-                'error' => $e->getMessage(),
-                'site_id' => $siteId,
-                'tenant' => $tenant,
-                'domains' => $domains,
-            ]);
-            
-            throw new \Exception("Failed to request SSL certificate in Ploi: {$e->getMessage()}");
+        while ($attempts < self::MAX_RETRIES) {
+            try {
+                // Check if DNS has propagated first
+                if ($this->isDnsPropagated($domains)) {
+                    $response = $this->makeRequest('post', "servers/{$this->serverId}/sites/{$siteId}/tenants/{$tenant}/request-certificate", [
+                        'domains' => is_string($domains) ? $domains : implode(',', $domains),
+                    ]);
+                    
+                    if ($response->successful()) {
+                        Log::info('SSL certificate requested successfully', [
+                            'site_id' => $siteId,
+                            'tenant' => $tenant,
+                            'domains' => $domains
+                        ]);
+                        return $response->json();
+                    }
+                }
+                
+                $attempts++;
+                if ($attempts < self::MAX_RETRIES) {
+                    Log::info('Waiting for DNS propagation before retry', [
+                        'attempt' => $attempts,
+                        'site_id' => $siteId,
+                        'tenant' => $tenant,
+                        'domains' => $domains
+                    ]);
+                    sleep(self::RETRY_DELAY);
+                }
+            } catch (\Exception $e) {
+                $attempts++;
+                Log::error('Error requesting SSL certificate', [
+                    'attempt' => $attempts,
+                    'error' => $e->getMessage()
+                ]);
+                
+                if ($attempts >= self::MAX_RETRIES) {
+                    throw $e;
+                }
+                sleep(self::RETRY_DELAY);
+            }
         }
+        
+        throw new \Exception('Failed to request SSL certificate after ' . self::MAX_RETRIES . ' attempts');
     }
 
     /**
@@ -118,7 +151,7 @@ class PloiService
      * @return bool
      * @throws \Exception
      */
-    public function deleteTenant(int $siteId, string $tenant): bool
+    public function deleteTenant(int|string $siteId, string $tenant): bool
     {
         try {
             $endpoint = "servers/{$this->serverId}/sites/{$siteId}/tenants/" . urlencode(trim($tenant));
@@ -202,5 +235,27 @@ class PloiService
     private function getFullUrl(string $endpoint): string
     {
         return self::API_BASE_URL . '/' . trim($endpoint, '/');
+    }
+
+    private function isDnsPropagated(array $domains): bool
+    {
+        foreach ($domains as $domain) {
+            // Get the expected IP from your configuration
+            $expectedIp = config('dukan.cloudflare.ip');
+            
+            // Perform DNS lookup
+            $ips = gethostbynamel($domain);
+            
+            if (!$ips || !in_array($expectedIp, $ips)) {
+                Log::info('DNS not yet propagated', [
+                    'domain' => $domain,
+                    'expected_ip' => $expectedIp,
+                    'current_ips' => $ips ?? 'none'
+                ]);
+                return false;
+            }
+        }
+        
+        return true;
     }
 } 
