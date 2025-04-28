@@ -38,7 +38,7 @@ class CreateTenantWithPloi implements ShouldQueue
         Log::info("Creating tenant with ploi", ["domains" => $domains]);
         event(new TenantStatusChanged($this->tenant, 'tenant_created_in_ploi'));
         foreach ($domains as $domain) {
-            $cloudResponse = $cloudService->addDnsRecord('A', $domain->domain, config("services.cloudflare.ip"));
+            $cloudResponse = $cloudService->addDnsRecord('A', $domain->domain, config("dukan.cloudflare.ip"));
             $dnsId = Arr::get($cloudResponse, 'result.id');
             if ($dnsId) {
                 $domain->dns_id = $dnsId;
@@ -48,7 +48,7 @@ class CreateTenantWithPloi implements ShouldQueue
             event(new TenantStatusChanged($this->tenant, 'dns_record_added'));
         }
         $pluckDomains = $domains->pluck('domain')->toArray();
-        $ploiService->createTenant(config('services.ploi.site_id'), $pluckDomains);
+        $ploiService->createTenant(config('dukan.ploi.site_id'), $pluckDomains);
         Log::info("Requesting certificate", ["domains" => $pluckDomains]);
         event(new TenantStatusChanged($this->tenant, 'certificate_requested'));
         dispatch(new RequestTenantCertificate($this->tenant))->delay(60);

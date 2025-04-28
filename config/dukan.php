@@ -21,6 +21,7 @@ return [
     'cloudflare' => [
         'api_token' => env('DUKAN_CLOUDFLARE_API_TOKEN'),
         'zone_id' => env('DUKAN_CLOUDFLARE_ZONE_ID'),
+        "ip"      =>  env('DUKAN_CLOUDFLARE_IP')
     ],
 
     /*
@@ -31,5 +32,7 @@ return [
     'ploi' => [
         'api_token' => env('DUKAN_PLOI_API_TOKEN'),
         'server_id' => env('DUKAN_PLOI_SERVER_ID'),
+        'site_id' => env('DUKAN_PLOI_SITE_ID'),
+
     ],
 ];

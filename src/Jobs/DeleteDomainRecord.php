@@ -42,7 +42,7 @@ class DeleteDomainRecord implements ShouldQueue
 
     protected function deleteDomainFromPloi(PloiService $ploiService): void
     {
-        $ploiService->deleteTenant(config('services.ploi.site_id'), $this->domain->domain);
+        $ploiService->deleteTenant(config('dukan.ploi.site_id'), $this->domain->domain);
     }
 
     

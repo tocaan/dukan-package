@@ -25,11 +25,14 @@ DUKAN_S3_REGION=your-region
 ```
 DUKAN_CLOUDFLARE_API_TOKEN=your-cloudflare-token
 DUKAN_CLOUDFLARE_ZONE_ID=your-cloudflare-zone
+DUKAN_CLOUDFLARE_IP=your-cloudflare-ip
+
 ```
 
 ```
 DUKAN_PLOI_API_TOKEN=your-ploi-token
 DUKAN_PLOI_SERVER_ID=your-server-id
+DUKAN_PLOI_SITE_ID=your-site-id
 ```
 
 [//]: # ()

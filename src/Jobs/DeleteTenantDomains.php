@@ -43,7 +43,7 @@ class DeleteTenantDomains implements ShouldQueue
 
     protected function deleteDomainFromPloi( $domain): void
     {
-        $this->ploiService->deleteTenant(config('services.ploi.site_id'), $domain->domain);
+        $this->ploiService->deleteTenant(config('dukan.ploi.site_id'), $domain->domain);
     }
 
     

@@ -29,7 +29,7 @@ class RequestTenantCertificate implements ShouldQueue
     {
         $ploiService = app(PloiService::class);
         $this->tenant->domains->each(function ($domainModel) use ($ploiService) {
-            $ploiService->requestCertificate(config('services.ploi.site_id'), $domainModel->domain, [$domainModel->domain]);
+            $ploiService->requestCertificate(config('dukan.ploi.site_id'), $domainModel->domain, [$domainModel->domain]);
         });
     }
 }
