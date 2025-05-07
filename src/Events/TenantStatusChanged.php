@@ -15,6 +15,7 @@ class TenantStatusChanged implements ShouldQueue
     use InteractsWithQueue;
     use Queueable;
     use SerializesModels;
+    //tes package
 
     /**
      * @var
