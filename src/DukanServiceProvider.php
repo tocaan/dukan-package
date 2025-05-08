@@ -30,7 +30,11 @@ class DukanServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'dukan');
         $this->publishes([
             __DIR__ . '/../config/dukan.php' => config_path('dukan.php'),
+            __DIR__ . '/../config/tenancy.php' => config_path('tenancy.php'),
         ], 'config');
+        $this->publishes([
+            __DIR__ . '/../Database/providers' => app_path('Providers'),
+        ], 'providers');
     }
 
     public function register()
