@@ -33,7 +33,7 @@ class DukanServiceProvider extends ServiceProvider
             __DIR__ . '/../config/tenancy.php' => config_path('tenancy.php'),
         ], 'config');
         $this->publishes([
-            __DIR__ . '/../Database/providers' => app_path('Providers'),
+            __DIR__ . '/../providers' => app_path('Providers'),
         ], 'providers');
     }
 
