@@ -2,6 +2,7 @@
 
 return [
 
+    "is_tenancy" => env('DUKAN_IS_TENANCY', true),
     /*
     |--------------------------------------------------------------------------
     | S3 Configuration

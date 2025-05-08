@@ -21,7 +21,10 @@ DUKAN_S3_KEY=your-key
 DUKAN_S3_SECRET=your-secret
 DUKAN_S3_REGION=your-region
 ```
+```
+DUKAN_IS_TENANCY=true // if you want to use tenancy and load route for tenant
 
+```
 ```
 DUKAN_CLOUDFLARE_API_TOKEN=your-cloudflare-token
 DUKAN_CLOUDFLARE_ZONE_ID=your-cloudflare-zone
