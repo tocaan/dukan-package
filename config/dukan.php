@@ -51,6 +51,7 @@ return [
     */
     'tenancy' => [
         'base_domain' => env('DUKAN_TENANCY_BASE_DOMAIN', 'dukan.test'),  
+         "identifier" => env('DUKAN_TENANCY_IDENTIFIER', 'id'),
         'reserved_names' => [
             'stgcrm',
             'stgstore',
