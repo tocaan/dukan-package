@@ -42,7 +42,20 @@ return [
         'server_id' => env('DUKAN_PLOI_SERVER_ID'),
         'site_id' => env('DUKAN_PLOI_SITE_ID'),
         "server_ip" => env('DUKAN_PLOI_SERVER_IP'),
+    ],
 
-
+     /*
+    |--------------------------------------------------------------------------
+    | Tenancy Configuration
+    |--------------------------------------------------------------------------
+    */
+    'tenancy' => [
+        'base_domain' => env('DUKAN_TENANCY_BASE_DOMAIN', 'dukan.test'),  
+        'reserved_names' => [
+            'stgcrm',
+            'stgstore',
+            'crm',
+            'store'
+        ],  
     ],
 ];
