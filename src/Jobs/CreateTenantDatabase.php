@@ -39,9 +39,9 @@ class CreateTenantDatabase extends CreateDatabase
             return false;
         }
 
-
-
-        $database = 'tenancy_db_' . $this->tenant->id;
+        $key = $this->tenant->{config('dukan.tenancy.identifier')};
+        $key = str_replace(["-"," "], "_", $key);
+        $database = 'tenancy_db_' . $key;
         $username = 'user_' . Str::random(8);
         $password = Str::random(16);
 
