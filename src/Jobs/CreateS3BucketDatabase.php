@@ -33,7 +33,9 @@ class CreateS3BucketDatabase implements ShouldQueue
      */
     public function handle()
     {
-        $bucketName = $this->tenant->id . '-bucket-s3';
+        $key = $this->tenant->{config('dukan.tenancy.identifier')};
+        $key = str_replace([" ","_"], "-", $key);
+        $bucketName = $key . '-bucket-s3';
         $AwsService = app(AwsService::class);
         $s3 = $AwsService->createBucket($bucketName);
         $this->tenant->setInternal('s3_bucket', $bucketName);
