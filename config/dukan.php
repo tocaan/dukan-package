@@ -9,7 +9,7 @@ return [
     | if you want to use tenancy and load route for tenant
     */
     "is_tenancy" => env('DUKAN_IS_TENANCY', true),
-    
+
     /*
     |--------------------------------------------------------------------------
     | S3 Configuration
@@ -50,13 +50,51 @@ return [
     |--------------------------------------------------------------------------
     */
     'tenancy' => [
-        'base_domain' => env('DUKAN_TENANCY_BASE_DOMAIN', 'dukan.test'),  
-         "identifier" => env('DUKAN_TENANCY_IDENTIFIER', 'id'),
+        'base_domain' => env('DUKAN_TENANCY_BASE_DOMAIN', 'dukan.test'),
+        "modules_path" => base_path('Modules'),
+        "modules" => [
+            "Advertising",
+            "Apps",
+            "Area",
+            "Attribute",
+            "Authentication",
+            "Authorization",
+            "Branch",
+            "Cart",
+            "Catalog",
+            "Company",
+            "Core",
+            "Coupon",
+            "DeviceToken",
+            "Log",
+            "Notification",
+            "Occasion",
+            "Order",
+            "POS",
+            "Page",
+            "Report",
+            "Setting",
+            "Slider",
+            "Subscription",
+            "Tags",
+            "Transaction",
+            "Translation",
+            "User",
+            "Variation",
+            "Vendor",
+            "Subscription",
+            "Transaction",
+            "Translation",
+            "User",
+            "Variation",
+            "Vendor",
+        ],
+        "identifier" => env('DUKAN_TENANCY_IDENTIFIER', 'name'),
         'reserved_names' => [
             'stgcrm',
             'stgstore',
             'crm',
             'store'
-        ],  
+        ],
     ],
 ];
