@@ -27,11 +27,16 @@ class Tenant extends BaseTenant implements TenantWithDatabase
         });
     }
 
-//    public static function getCustomColumns(): array
-//    {
-//        return [
-//            'id',
-//            'plan',
-//        ];
-//    }
+    public function status()
+    {
+        return $this->hasMany(TenantStatusLog::class);
+    }
+
+   public static function getCustomColumns(): array
+   {
+       return [
+           'id',
+           'name',
+       ];
+   }
 }
