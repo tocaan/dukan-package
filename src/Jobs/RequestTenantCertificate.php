@@ -3,12 +3,13 @@
 namespace Tocaan\Dukan\Jobs;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Queue\SerializesModels;
+use Tocaan\Dukan\Services\PloiService;
+use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Queue\SerializesModels;
+use Tocaan\Dukan\Events\TenantStatusChanged;
 use Stancl\Tenancy\Contracts\TenantWithDatabase;
-use Tocaan\Dukan\Services\PloiService;
 
 class RequestTenantCertificate implements ShouldQueue
 {
@@ -31,5 +32,7 @@ class RequestTenantCertificate implements ShouldQueue
         $this->tenant->domains->each(function ($domainModel) use ($ploiService) {
             $ploiService->requestCertificate(config('dukan.ploi.site_id'), $domainModel->domain, [$domainModel->domain]);
         });
+        event(new TenantStatusChanged($this->tenant, 'certificate_requested'));
+
     }
 }
