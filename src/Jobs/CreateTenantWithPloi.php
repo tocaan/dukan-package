@@ -50,7 +50,7 @@ class CreateTenantWithPloi implements ShouldQueue
         $pluckDomains = $domains->pluck('domain')->toArray();
         $ploiService->createTenant(config('dukan.ploi.site_id'), $pluckDomains);
         Log::info("Requesting certificate", ["domains" => $pluckDomains]);
-        event(new TenantStatusChanged($this->tenant, 'certificate_requested'));
+        // event(new TenantStatusChanged($this->tenant, 'certificate_requested'));
         dispatch(new RequestTenantCertificate($this->tenant))->delay(60);
     }
 }
