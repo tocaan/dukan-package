@@ -61,5 +61,17 @@ class TenantStatusLogListener
             ['tenant_id' => $event->tenant->id, 'status' => $event->newStatus],
             ['tenant_id' => $event->tenant->id, 'status' => $event->newStatus]
         );
+
+        $statuses = [
+            's3_bucket_created',
+            'database_created',
+            'tenant_created_in_ploi',
+            'dns_record_added',
+            'certificate_requested',
+        ];
+        $logs = TenantStatusLog::where('tenant_id', $event->tenant->id)->whereIn('status', $statuses)->count();
+        if ($logs >= 5) {
+            $event->tenant->update(['is_up' => true]);
+        }
     }
 }
