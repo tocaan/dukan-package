@@ -37,8 +37,7 @@ class TenancyServiceProvider extends ServiceProvider
                     CreateS3BucketDatabase::class,
                     CreateTenantDatabase::class,
                     MigrateDatabase::class,
-                    RunDatabaseSeeder::class,
-                    // SeedDatabase::class,
+                    SeedDatabase::class,
 
                     // Your own jobs to prepare the tenant.
                     // Provision API keys, create S3 buckets, anything you want!

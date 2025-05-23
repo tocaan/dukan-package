@@ -35,7 +35,9 @@ class CreateS3BucketDatabase implements ShouldQueue
     {
         $key = $this->tenant->{config('dukan.tenancy.identifier')};
         $key = str_replace([" ","_"], "-", $key);
-        $bucketName = $key . '-bucket-s3';
+        // Generate random 3 characters
+        $randomStr = substr(str_shuffle('abcdefghijklmnopqrstuvwxyz0123456789'), 0, 3);
+        $bucketName = $key . '-' . $randomStr . '-bucket-s3';
         $AwsService = app(AwsService::class);
         $s3 = $AwsService->createBucket($bucketName);
         $this->tenant->setInternal('s3_bucket', $bucketName);
