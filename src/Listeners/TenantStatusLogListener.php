@@ -4,8 +4,8 @@ namespace Tocaan\Dukan\Listeners;
 //use App\Models\TenantStatusLog;
 use Tocaan\Dukan\Events\TenantStatusChanged;
 use Tocaan\Dukan\Models\TenantStatusLog;
-
-class TenantStatusLogListener
+use Illuminate\Contracts\Queue\ShouldQueue;
+class TenantStatusLogListener implements ShouldQueue
 {
     /**
      * The event listener's priority.
@@ -71,6 +71,7 @@ class TenantStatusLogListener
         ];
         $logs = TenantStatusLog::where('tenant_id', $event->tenant->id)->whereIn('status', $statuses)->count();
         if ($logs >= 5) {
+            $event->tenant->refresh();
             $event->tenant->update(['is_up' => true]);
         }
     }
