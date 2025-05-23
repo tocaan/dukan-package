@@ -63,10 +63,10 @@ class CreateTenantDatabase extends CreateDatabase
         // $this->tenant->save()
         
         $this->tenant->update([
-            'db_name' => $database,
-            'db_username' => $username,
-            'db_password' => $password,
-            'db_id' => Arr::get($ploiDatabase, 'data.id'),
+            'tenancy_db_name' => $database,
+            'tenancy_db_username' => $username,
+            'tenancy_db_password' => $password,
+            'tenancy_db_id' => Arr::get($ploiDatabase, 'data.id'),
         ]);
        
         event(new TenantStatusChanged($this->tenant, 'database_created'));
