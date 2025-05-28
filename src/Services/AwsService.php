@@ -53,6 +53,44 @@ class AwsService
     }
 
     /**
+     * Set a policy for a bucket in AWS S3
+     *
+     * @param string $bucketName bucket name
+     * @param array $policyConfig policy config
+     * @throws \Exception
+     */
+    public function setBucketPolicy(string $bucketName, $policyConfig=[]): \Aws\Result
+    {
+        try {
+
+            // 2. Wait until the bucket exists
+            $this->s3->waitUntil('BucketExists', [
+                'Bucket' => $bucketName,
+            ]);
+
+            $policy =  [
+                'Version' => now()->format('Y-m-d'),
+                'Statement' => [[
+                    'Sid' => 'PublicReadGetObject',
+                    'Effect' => 'Allow',
+                    'Principal' => '*',
+                    'Action' => 's3:GetObject',
+                    'Resource' => "arn:aws:s3:::$bucketName/*"
+                ]]
+            ];
+
+            $policy = json_encode(array_merge($policy, $policyConfig));
+
+            return $this->s3->putBucketPolicy([
+                'Bucket' => $bucketName,
+                'Policy' => $policy,
+            ]);
+        } catch (\Exception $e) {
+            throw new \Exception("Failed to set database in AWS S3: {$e->getMessage()}");
+        }
+    }
+
+    /**
      * Delete a existing bucket in AWS S3
      *
      * @param string $bucketName bucket name
