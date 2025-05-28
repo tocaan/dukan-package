@@ -47,9 +47,11 @@ class CreateTenantDatabase extends CreateDatabase
 
         $ploiService = app(PloiService::class);
 
-        $this->tenant->setInternal('db_name', $database);
-        $this->tenant->setInternal('db_username', $username);
-        $this->tenant->setInternal('db_password', $password);
+       
+
+        // $this->tenant->setInternal('db_name', $database);
+        // $this->tenant->setInternal('db_username', $username);
+        // $this->tenant->setInternal('db_password', $password);
         // Create database using Ploi
         $ploiDatabase = $ploiService->createDatabase(
             name: $database,
@@ -57,8 +59,16 @@ class CreateTenantDatabase extends CreateDatabase
             password: $password
         );
         logger("create database",$ploiDatabase);
-        $this->tenant->setInternal('db_id', Arr::get($ploiDatabase, 'data.id'));
-        $this->tenant->save();
+        // $this->tenant->setInternal('db_id', Arr::get($ploiDatabase, 'data.id'));
+        // $this->tenant->save()
+        
+        $this->tenant->update([
+            'tenancy_db_name' => $database,
+            'tenancy_db_username' => $username,
+            'tenancy_db_password' => $password,
+            'tenancy_db_id' => Arr::get($ploiDatabase, 'data.id'),
+        ]);
+       
         event(new TenantStatusChanged($this->tenant, 'database_created'));
         sleep(4);
         event(new DatabaseCreated($this->tenant));
