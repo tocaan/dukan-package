@@ -32,7 +32,7 @@ class TenantStatusLog extends Model
 
         static::created(function ($model) {
             $tenant = $model->tenant;
-            $countForEvent = $tenant->TenantStatusLog()->whereIn('status', ['database_created', 'database_migrated', 'database_seeded'])->count();
+            $countForEvent = $tenant->status()->whereIn('status', ['database_created', 'database_migrated', 'database_seeded'])->count();
             if($countForEvent == 3) {
                 $tenant->status = 1;
                 $tenant->save();
