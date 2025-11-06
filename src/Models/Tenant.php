@@ -37,7 +37,8 @@ class Tenant extends BaseTenant implements TenantWithDatabase
        return [
            'id',
            'name',
-           "email"
+           "email",
+           "is_up"
        ];
    }
 }
