@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace Tocaan\Dukan\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
