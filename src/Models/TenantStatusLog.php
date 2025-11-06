@@ -34,7 +34,7 @@ class TenantStatusLog extends Model
             $tenant = $model->tenant;
             $countForEvent = $tenant->status()->whereIn('status', ['database_created', 'database_migrated', 'database_seeded'])->count();
             if($countForEvent == 3) {
-                $tenant->status = 1;
+                $tenant->is_up = 1;
                 $tenant->save();
             }
         });
